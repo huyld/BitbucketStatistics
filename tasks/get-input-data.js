@@ -20,6 +20,7 @@ let configData = new ConfigurationData();
 function readConfigurationData() {
 
   return new Promise((resolve, reject) => {
+    console.info(`Reading configuration data...`)
 
     let username, password;
 
@@ -51,6 +52,7 @@ function readConfigurationData() {
     });
 
     lineReader.on('close', () => {
+      console.info(`Finish reading configuration data.`)
       resolve(configData);
     });
   });
