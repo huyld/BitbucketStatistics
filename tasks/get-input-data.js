@@ -7,6 +7,7 @@ class ConfigurationData {
     this.repositoriesURL = '';
     this.username = '';
     this.password = '';
+    this.interestedMembers = [];
   }
 }
 
@@ -40,6 +41,9 @@ function readConfigurationData() {
           break;
         case 'password':
           configData.password = lineArr[1];
+          break;
+        case 'interestedMembers':
+          configData.interestedMembers = lineArr[1].split(':');
           break;
         default:
           break;
