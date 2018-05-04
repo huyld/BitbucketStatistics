@@ -22,8 +22,6 @@ function readConfigurationData() {
   return new Promise((resolve, reject) => {
     console.info(`Reading configuration data...`)
 
-    let username, password;
-
     // Read input file
     const configFilePath = path.join(__dirname, '../config.conf');
     const lineReader = readline.createInterface({
@@ -35,15 +33,12 @@ function readConfigurationData() {
 
       switch (lineArr[0]) {
         case 'repositoriesURL':
-          repositoriesURL = lineArr[1];
           configData.repositoriesURL = lineArr[1];
           break;
         case 'username':
-          username = lineArr[1];
           configData.username = lineArr[1];
           break;
         case 'password':
-          password = lineArr[1];
           configData.password = lineArr[1];
           break;
         default:
