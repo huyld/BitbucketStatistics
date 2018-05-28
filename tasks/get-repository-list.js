@@ -1,5 +1,4 @@
 var request = require('request');
-var fs = require('fs');
 
 /**
  * Get the information of repositories where interested members participate in
@@ -7,6 +6,7 @@ var fs = require('fs');
  * @param {any} configData
  */
 function requestRepositoriesInfo(configData) {
+  return new Promise((resolve, reject) => {
   request
     .get(configData.repositoriesURL, {
       auth: {
@@ -21,21 +21,8 @@ function requestRepositoriesInfo(configData) {
       });
 
       res.on('end', function () {
-        handleRepositoriesList(res);
       });
     });
-}
-
-function handleRepositoriesList(res) {
-  const jsonObj = JSON.parse(res.body);
-  const jsonStr = JSON.stringify(jsonObj, null, 4);
-
-  // Write to file to make it easier to check (use in developing phase only)
-  fs.writeFile('response.txt', jsonStr, (err) => {
-    if (err) {
-      console.error('Failed to write to file.', err);
-    }
-  });
 }
 
 exports.requestRepositoriesInfo = requestRepositoriesInfo;
