@@ -21,7 +21,7 @@ let configData = new ConfigurationData();
 function readConfigurationData() {
 
   return new Promise((resolve, reject) => {
-    console.info(`Reading configuration data...`);
+    console.info('Reading configuration data...');
 
     // Read input file
     const configFilePath = path.join(__dirname, '../config.conf');
@@ -51,7 +51,7 @@ function readConfigurationData() {
     });
 
     lineReader.on('close', () => {
-      console.info(`Finish reading configuration data.`);
+      console.info('Finish reading configuration data.');
       resolve(configData);
     });
   });
