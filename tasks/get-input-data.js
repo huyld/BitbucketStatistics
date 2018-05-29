@@ -7,6 +7,7 @@ class ConfigurationData {
     this.repositoriesURL = '';
     this.username = '';
     this.password = '';
+    this.interestedMembers = [];
   }
 }
 
@@ -20,8 +21,7 @@ let configData = new ConfigurationData();
 function readConfigurationData() {
 
   return new Promise((resolve, reject) => {
-
-    let username, password;
+    console.info('Reading configuration data...');
 
     // Read input file
     const configFilePath = path.join(__dirname, '../config.conf');
@@ -34,16 +34,16 @@ function readConfigurationData() {
 
       switch (lineArr[0]) {
         case 'repositoriesURL':
-          repositoriesURL = lineArr[1];
           configData.repositoriesURL = lineArr[1];
           break;
         case 'username':
-          username = lineArr[1];
           configData.username = lineArr[1];
           break;
         case 'password':
-          password = lineArr[1];
           configData.password = lineArr[1];
+          break;
+        case 'interestedMembers':
+          configData.interestedMembers = lineArr[1].split(':');
           break;
         default:
           break;
@@ -51,6 +51,7 @@ function readConfigurationData() {
     });
 
     lineReader.on('close', () => {
+      console.info('Finish reading configuration data.');
       resolve(configData);
     });
   });
